@@ -1,8 +1,8 @@
 const { sendSuccessRes } = require('../../helpers')
-const { listContacts } = require('../../model/contacts')
+const { Contact } = require('../../models/contact')
 
 const listAllContacts = async (req, res) => {
-  const result = await listContacts()
+  const result = await Contact.find({}, '_id, name, email, phone, favorite')
   sendSuccessRes(res, { result })
 }
 
