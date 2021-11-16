@@ -14,7 +14,7 @@ const signUp = async(req, res, next) => {
     newUser.setPassword(password)
     await newUser.save()
 
-    sendSuccessRes(res, { user: newUser, message: 'Success' }, 201)
+    sendSuccessRes(res, { user: newUser, message: 'Success signup' }, 201)
   } catch (error) {
     next(error)
   }

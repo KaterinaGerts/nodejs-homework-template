@@ -14,7 +14,7 @@ const logIn = async(req, res, next) => {
     const token = user.createToken()
 
     await User.findByIdAndUpdate(_id, { token })
-    sendSuccessRes(res, { user, message: 'Success' }, 200)
+    sendSuccessRes(res, { user, message: 'Success login' }, 200)
   } catch (error) {
     next(error)
   }

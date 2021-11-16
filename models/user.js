@@ -47,7 +47,7 @@ userSchema.methods.createToken = function() {
   return jwt.sign(payload, SECRET_KEY)
 }
 
-const joiUserSchema = Joi.object({
+const joiSchema = Joi.object({
   email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required()
 })
@@ -55,6 +55,6 @@ const joiUserSchema = Joi.object({
 const User = model('user', userSchema)
 
 module.exports = {
-  joiUserSchema,
+  joiSchema,
   User
 }
