@@ -11,6 +11,7 @@ const authenticate = async(req, res, next) => {
       code: 401,
       message: 'Not authorized',
     })
+    return
   }
 
   const [bearer, token] = authorization.split(' ')
@@ -20,6 +21,7 @@ const authenticate = async(req, res, next) => {
       code: 401,
       message: 'Not authorized',
     })
+    return
   }
 
   try {
@@ -31,6 +33,7 @@ const authenticate = async(req, res, next) => {
         code: 401,
         message: 'Not authorized',
       })
+      return
     }
     req.user = user
     next()

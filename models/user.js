@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose')
-const Joi = require('joi')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Joi = require('joi')
 
 const emailRegExp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
 
@@ -47,14 +47,15 @@ userSchema.methods.createToken = function() {
   return jwt.sign(payload, SECRET_KEY)
 }
 
-const joiSchema = Joi.object({
+const joiUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegExp).required(),
-  password: Joi.string().min(6).required()
+  password: Joi.string().min(6).required(),
+  subscription: Joi.string().valid('starter', 'pro', 'business')
 })
 
 const User = model('user', userSchema)
 
 module.exports = {
-  joiSchema,
+  joiUserSchema,
   User
 }
