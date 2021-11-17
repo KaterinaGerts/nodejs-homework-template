@@ -2,22 +2,20 @@ const { User } = require('../../models')
 const { sendSuccessRes } = require('../../helpers')
 const { NotFound } = require('http-errors')
 
-const logIn = async(req, res, next) => {
-  try {
-    const { email, password } = req.body
-    const user = await User.findOne({ email })
-    if (!user || !user.comparePassword(password)) {
-      throw new NotFound('Invalid email or password')
-    }
+const logIn = async(req, res) => {
+  const { email, password } = req.body
 
-    const { _id } = user
-    const token = user.createToken()
+  const user = await User.findOne({ email })
 
-    await User.findByIdAndUpdate(_id, { token })
-    sendSuccessRes(res, { user, message: 'Success login' }, 200)
-  } catch (error) {
-    next(error)
+  if (!user || !user.comparePassword(password)) {
+    throw new NotFound('Invalid email or password')
   }
+
+  const { _id } = user
+  const token = user.createToken()
+
+  const newUser = await User.findByIdAndUpdate(_id, { token })
+  sendSuccessRes(res, { user: newUser, message: 'Success login' }, 200)
 }
 
 module.exports = logIn

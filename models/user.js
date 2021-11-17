@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
+require('dotenv').config()
 
 const emailRegExp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
 
@@ -39,7 +40,8 @@ userSchema.methods.comparePassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-const SECRET_KEY = process.env
+const { SECRET_KEY } = process.env
+
 userSchema.methods.createToken = function() {
   const payload = {
     _id: this._id
