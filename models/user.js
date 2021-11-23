@@ -28,7 +28,11 @@ const userSchema = Schema({
   token: {
     type: String,
     default: null,
-  }
+  },
+  avatarURL: {
+    type: String,
+    default: '',
+  },
 
 }, { versionKey: false, timestamps: true })
 
@@ -52,7 +56,8 @@ userSchema.methods.createToken = function() {
 const joiUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required(),
-  subscription: Joi.string().valid('starter', 'pro', 'business')
+  subscription: Joi.string().valid('starter', 'pro', 'business'),
+  avatarURL: Joi.string()
 })
 
 const User = model('user', userSchema)
