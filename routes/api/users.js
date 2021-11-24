@@ -7,6 +7,8 @@ const router = express.Router()
 
 router.post('/signup', validation(joiUserSchema), controllerWrapper(ctrl.signUp))
 
+router.get('/verify/:verifyToken', controllerWrapper(ctrl.verify))
+
 router.post('/login', validation(joiUserSchema), controllerWrapper(ctrl.logIn))
 
 router.get('/logout', authenticate, controllerWrapper(ctrl.logOut))

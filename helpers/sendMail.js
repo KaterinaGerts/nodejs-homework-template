@@ -19,7 +19,7 @@ const sendMail = async(data) => {
     const email = { ...data, from: 'katyushka.84@mail.ru' }
     await transporter.sendMail(email)
   } catch (error) {
-    return false
+    console.log(error)
   }
 }
 

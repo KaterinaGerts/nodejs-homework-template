@@ -1,6 +1,6 @@
 const { User } = require('../../models')
 const { sendSuccessRes } = require('../../helpers')
-const { NotFound } = require('http-errors')
+const { NotFound, BadRequest } = require('http-errors')
 
 const logIn = async(req, res) => {
   const { email, password } = req.body
@@ -9,6 +9,10 @@ const logIn = async(req, res) => {
 
   if (!user || !user.comparePassword(password)) {
     throw new NotFound('Invalid email or password')
+  }
+
+  if (!user.verify) {
+    throw new BadRequest('Email not verified')
   }
 
   const { _id } = user

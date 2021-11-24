@@ -4,6 +4,7 @@ const logOut = require('./logOut')
 const getAllByCurrentUser = require('./getAllByCurrentUser')
 const addAvatar = require('./addAvatar')
 const extentionList = require('./extentionList')
+const verify = require('./verify')
 
 module.exports = {
   signUp,
@@ -11,5 +12,6 @@ module.exports = {
   logOut,
   getAllByCurrentUser,
   addAvatar,
-  extentionList
+  extentionList,
+  verify
 }
