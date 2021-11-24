@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
+const { v4 } = require('uuid')
 require('dotenv').config()
 
 const emailRegExp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
@@ -59,6 +60,10 @@ userSchema.methods.createToken = function() {
     _id: this._id
   }
   return jwt.sign(payload, SECRET_KEY)
+}
+
+userSchema.methods.createVerifyToken = function() {
+  this.verifyToken = v4()
 }
 
 const joiUserSchema = Joi.object({

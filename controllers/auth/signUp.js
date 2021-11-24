@@ -15,6 +15,7 @@ const signUp = async(req, res, next) => {
 
     const newUser = new User({ email, avatarURL: defaultAvatar })
     newUser.setPassword(password)
+    newUser.createVerifyToken()
     await newUser.save()
 
     sendSuccessRes(res, { user: newUser, message: 'Success signup' }, 201)
