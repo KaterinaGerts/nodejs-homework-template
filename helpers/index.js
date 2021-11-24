@@ -1,5 +1,7 @@
 const sendSuccessRes = require('./sendSuccessRes')
+const sendMail = require('./sendMail')
 
 module.exports = {
-  sendSuccessRes
+  sendSuccessRes,
+  sendMail
 }
